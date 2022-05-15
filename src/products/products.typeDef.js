@@ -51,26 +51,9 @@ const productsTypeDefs = gql `
     faq: [FaqInput]
   } 
 
-  type PurchashedProduct {
-    id: ID!
-    name: String
-    productType: ProductTypeEnum!
-    priceType: PriceTypeEnum
-    content: String
-    author: User
-    preview: Preview
-    purchasedBy: User
-    originalProduct: String
-    categories: [Category]
-    createdAt: String!
-    updatedAt: String!
-    paymentLink: String
-  }
-
   type Query {
       getProducts: [Product]
       getSingleProduct(id: ID): Product
-      getPurchasedProduct(id: ID): PurchasedProduct
   }
 
   type Mutation {

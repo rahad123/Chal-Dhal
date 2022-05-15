@@ -8,6 +8,7 @@ const totalProduct = async() => {
 
 const service = {
     getProducts: async() => {
+        console.log(await totalProduct());
         return Product.find({});
     },
     getSingleProduct: async({ id: _id }) => {
@@ -16,8 +17,9 @@ const service = {
     deleteProduct: async({ id: _id }) => {
         return Product.findByIdAndDelete({ _id })
     },
-    createProduct: async({ args }) => {
+    createProduct: async({ ...args }) => {
         //console.log('service', args)
+        console.log('args', args);
         if(await totalProduct() === 0) {
             return Product.create({ args })
         }
@@ -31,7 +33,7 @@ const service = {
                 { $push: { product: newProduct._id } },
                 { session: session, new: true }
             )
-
+            console.log('productUpdate', productUpdate);
             if(!productUpdate) {
                 await session.abortTransaction();
                 session.endSession();
@@ -40,6 +42,7 @@ const service = {
 
             await session.commitTransaction();
             session.endSession();
+            // console.log('newProduct', newProduct);
             return newProduct;
 
         } catch {

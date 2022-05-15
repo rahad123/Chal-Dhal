@@ -35,11 +35,10 @@ const productResolvers = {
             try {
                 const { createProductInput } = args;
                 const input = await misc.toJsObject(createProductInput);
-                console.log({input,createProductInput});  
                 // return;
-                //const user = await service.createUser({args:input});      
+                // console.log('args', args);
+                // const product = await service.createProduct(args);      
                 const product = new Product( input );
-                console.log({input,createProductInput}); 
                 await product.save();
                 return product;
             } catch (err) {
