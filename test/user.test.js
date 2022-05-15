@@ -28,10 +28,6 @@ describe('User test suit', () => {
         await Promise.all([User.deleteMany({})]);
     });
 
-    beforeEach(async () => {
-        await Promise.all([User.deleteMany({})]);
-      });
-
     it('should create a new user', async () => {
         const userId = mongoose.Schema.ObjectId();
 

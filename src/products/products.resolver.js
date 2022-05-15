@@ -11,7 +11,6 @@ const productResolvers = {
             try {
                 // const input = await misc.toJsObject(args);
                 const products = await service.getProducts(args);
-                console.log(products);
                 return products;
             } catch (err) {
                 logger.error(err);

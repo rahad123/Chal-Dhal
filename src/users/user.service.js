@@ -1,9 +1,16 @@
 import { User } from './user.model.js';
 // import { querySkip } from '../helpers/common.js';
 
+const totalUser = async() => {
+    const userCount = (await User.find({})).length
+    console.log('totalUser', userCount);
+    return userCount;
+}
+
 const service = {
     getUsers: async() => {
         // const skip = await querySkip(page, perPage);
+        await totalUser();
         return User.find({}).sort({createAt: 'DESC', username: -1 });
     },
     getSingleUser: async({ id: _id }) => {

@@ -8,8 +8,6 @@ import {
     errors
 } from '../utils/error.js';
 import { misc } from '../utils/misc.js';
-import { cacheManager } from '../config/config.js'
-import { cacheKeys } from './user.enum.js';
 
 // const cacheManager = new redisCache();
 const userResolvers = {
@@ -17,28 +15,11 @@ const userResolvers = {
         getUsers: async (_, args, ctx) => {
             //return await User.find({});
             try {
-                // const input = await misc.toJsObject(args);
                 const { username, email} = args;
-                const cacheTags = await (cacheManager.get(cacheKeys.itemKey()));
-                console.log('cacheTags', cacheTags);
-                if(cacheTags) {
-                    return cacheTags;
-                }
                 const users = await service.getUsers(args);
-                // console.log(users);
-                await cacheManager.set(cacheKeys.itemKey(), users, 10000);
-                // console.log(users);
-                //await cacheManager.set('redis', users, 1000);
-                // const redis_value = await cacheManager.put('redis', users, 1000);
-                // const redis_value = await cacheManager.has('redis'); 
-                // console.log(redis_value);
-                // console.log(cacheKeys.itemKey());
-                // let value 
-                // if(redis_value === true) {
-                //     value = await cacheManager.destroy('redis');
-                // }
-                // console.log(value);       
-                //return users; 
+                console.log('users', users);
+                // console.log(users)
+                return users;
             } catch (err) {  
                 logger.error(err);
                 return errors.withApolloError(INTERNAL_SERVER_ERROR); 
@@ -61,8 +42,9 @@ const userResolvers = {
         createUser: async(_ , args, context, info) => {
             try {
                 const { createUserInput } = args;
+                console.log('args', args);
                 const input = await misc.toJsObject(createUserInput);  
-                await cacheManager.destroy(cacheKeys.itemKey());
+                // await cacheManager.destroy(cacheKeys.itemKey());
                 const user = await service.createUser(input);      
                 //const user = new User( input );
                 // console.log({input,createUserInput}); 
@@ -76,9 +58,7 @@ const userResolvers = {
             try {
                 // console.log(args);
                 // return;
-                await cacheManager.destroy(cacheKeys.itemKey());
                 const deleteUser = await service.deleteUser(args);
-                // console.log(deleteUser);
                 return deleteUser;
             } catch (err) {
                 logger.error(err);
@@ -104,12 +84,6 @@ const userResolvers = {
             return user;
         }
     }
-    // Mutation: {
-    //     createCat: async (_, { name }) => {
-    //         const kitty = new Cat({ name });
-    //         return kitty.save();
-    //     }
-    // }
 }
 
 // module.exports = userResolvers;

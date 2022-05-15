@@ -2,23 +2,6 @@
 import { gql } from 'apollo-server-express'
 
 const productsTypeDefs = gql `
-input CreateProductInput {
-    title: String!
-    desc: String!
-    priceType: PriceTypeEnum
-    productType: ProductTypeEnum
-    faq: [FaqInput]!
-  }
-
-  input UpdateProductInput {
-    title: String
-    desc: String
-    priceType: PriceTypeEnum
-    productType: ProductTypeEnum
-    isPublished: Boolean
-    faq: [FaqInput]
-  } 
-
   input FaqInput {
       question: String
       answer: String
@@ -51,9 +34,43 @@ input CreateProductInput {
       faq: [faq]
   }
 
+  input CreateProductInput {
+    title: String!
+    desc: String!
+    priceType: PriceTypeEnum
+    productType: ProductTypeEnum
+    faq: [FaqInput]!
+  }
+
+  input UpdateProductInput {
+    title: String
+    desc: String
+    priceType: PriceTypeEnum
+    productType: ProductTypeEnum
+    isPublished: Boolean
+    faq: [FaqInput]
+  } 
+
+  type PurchashedProduct {
+    id: ID!
+    name: String
+    productType: ProductTypeEnum!
+    priceType: PriceTypeEnum
+    content: String
+    author: User
+    preview: Preview
+    purchasedBy: User
+    originalProduct: String
+    categories: [Category]
+    createdAt: String!
+    updatedAt: String!
+    paymentLink: String
+  }
+
   type Query {
       getProducts: [Product]
-      getSingleProduct(id:ID): Product
+      getSingleProduct(id: ID): Product
+      getPurchasedProduct(id: ID): PurchasedProduct
   }
 
   type Mutation {
