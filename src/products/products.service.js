@@ -12,7 +12,7 @@ const service = {
         return Product.find({});
     },
     getSingleProduct: async({ id: _id }) => {
-        return Product.findById({ _id })
+        return Product.findById({ id })
     },
     deleteProduct: async({ id: _id }) => {
         return Product.findByIdAndDelete({ _id })

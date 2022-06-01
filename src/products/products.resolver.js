@@ -9,8 +9,11 @@ const productResolvers = {
     Query: {
         getProducts: async (_, args, ctx) => {
             try {
-                // const input = await misc.toJsObject(args);
-                const products = await service.getProducts(args);
+                console.log('args', args);
+                const input = await misc.toJsObject(args);
+                // const products = await service.getProducts(args);
+                const product = await Product.find({});
+                // console.log('product', product);
                 return products;
             } catch (err) {
                 logger.error(err);
@@ -19,9 +22,11 @@ const productResolvers = {
         },
         getSingleProduct: async(_, args, ctx, info) => {
             try {
-                const product = await service.getSingleProduct(args);
-                console.log(product);
-                return product;
+                // const product = await service.getSingleProduct(args);
+                const product = await Product.findOne({tilte: "daf"});
+                console.log('product', product);
+                // const product = Product.find({title: 'daf'});
+                // return product;
             } catch (err) {
                 logger.error(err)
                 //return withApolloError(INTERNAL_SERVER_ERROR);
