@@ -6,19 +6,20 @@ const totalProduct = async() => {
     return productCount;
 }
 
+
+
 const service = {
     getProducts: async() => {
         console.log(await totalProduct());
         return Product.find({});
     },
-    getSingleProduct: async({ id: _id }) => {
-        return Product.findById({ id })
+    getSingleProduct: async( id ) => {
+        return Product.findById( id )
     },
-    deleteProduct: async({ id: _id }) => {
-        return Product.findByIdAndDelete({ _id })
+    deleteProduct: async( id ) => {
+        return Product.findByIdAndDelete( id )
     },
     createProduct: async({ ...args }) => {
-        //console.log('service', args)
         console.log('args', args);
         if(await totalProduct() === 0) {
             return Product.create({ args })
@@ -42,7 +43,6 @@ const service = {
 
             await session.commitTransaction();
             session.endSession();
-            // console.log('newProduct', newProduct);
             return newProduct;
 
         } catch {
@@ -51,7 +51,13 @@ const service = {
     },
     updateProduct: async({ id: _id, ...args }) => {
         return Product.findByIdAndUpdate({ _id, args, new: true});  
-    }  
+    },
+    
+    getProductAggregation: async(userId) => {
+        let userProducts = await Product.find({userId});
+        console.log('userProducts', userProducts);
+        return userProducts;
+    }
 }
 
 export { service }

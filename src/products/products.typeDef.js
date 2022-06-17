@@ -29,7 +29,7 @@ const productsTypeDefs = gql `
       priceType: PriceTypeEnum
       productType: ProductTypeEnum
       quantity: String
-      author: User
+      userId: ID
       isPublished: Boolean
       faq: [faq]
   }
@@ -39,6 +39,7 @@ const productsTypeDefs = gql `
     desc: String!
     priceType: PriceTypeEnum
     productType: ProductTypeEnum
+    userId: ID
     faq: [FaqInput]!
   }
 
@@ -51,9 +52,19 @@ const productsTypeDefs = gql `
     faq: [FaqInput]
   } 
 
+  input AggregationProductInput {
+    id: ID!
+    title: String
+    desc: String
+    priceType: PriceTypeEnum
+    productType: ProductTypeEnum
+    quantity: String
+  }
+
   type Query {
       getProducts: [Product]
       getSingleProduct(id: ID): Product
+      getProductAggregation(userId: ID): Product
   }
 
   type Mutation {

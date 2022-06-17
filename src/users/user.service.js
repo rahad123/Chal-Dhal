@@ -1,4 +1,5 @@
 import { User } from './user.model.js';
+import { Product } from '../products/products.model.js';
 // import { querySkip } from '../helpers/common.js';
 
 const totalUser = async() => {
@@ -11,7 +12,7 @@ const service = {
     getUsers: async() => {
         // const skip = await querySkip(page, perPage);
         await totalUser();
-        return User.find({}).sort({createAt: 'DESC', username: -1 });
+        return User.find({});
     },
     getSingleUser: async({ id: _id }) => {
         return User.findById({ _id })

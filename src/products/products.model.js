@@ -37,10 +37,7 @@ const productSchema = new mongoose.Schema(
             // required : true,
             trim: true   
         },
-        author: {
-            type: mongoose.Schema.ObjectId,
-            ref: 'User'
-        },
+        userId: String,
         faq: [
             {
                 question: {
