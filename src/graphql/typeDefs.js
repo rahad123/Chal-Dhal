@@ -3,17 +3,14 @@
 
 // import pkg from 'lodash';
 // const { merge } = pkg;
-import { mergeTypeDefs } from '@graphql-tools/merge'
-import { usersTypeDefs } from '../users/user.typeDef.js'
-import { productsTypeDefs } from '../products/products.typeDef.js'
+import { mergeTypeDefs } from "@graphql-tools/merge";
+import { usersTypeDefs } from "../users/user.typeDef.js";
+import { productsTypeDefs } from "../products/products.typeDef.js";
 
 // const typeDef = merge(
 //     usersTypeDefs
 // );
 
-const typeDef = mergeTypeDefs([
-    usersTypeDefs,
-    productsTypeDefs
-])
+const typeDef = mergeTypeDefs([usersTypeDefs, productsTypeDefs]);
 
-export { typeDef }
+export { typeDef };
