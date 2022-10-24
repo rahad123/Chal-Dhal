@@ -7,7 +7,8 @@
   "scripts": {
     "test": "mocha \"./test/**/*.test.js\" --timeout 15000 --exit",
     "lint:fix": "eslint \"src/**/*.js\" \"test/**/*.js\" --fix",
-    "format": "prettier --write \"src/**/*.js\" \"test/**/*.js\""
+    "format": "prettier --write \"src/**/*.js\" \"test/**/*.js\"",
+    "dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -26,7 +27,10 @@
     "lodash": "^4.17.21",
     "mocha": "^9.2.1",
     "mongoose": "^6.2.2",
+    "node-event-trigger": "^0.3.0",
+    "nodemon": "^2.0.20",
     "redis": "^4.0.4",
+    "redis-caching-manager": "^2.1.0",
     "slugify": "^1.6.5",
     "winston": "^3.6.0"
   }

@@ -5,17 +5,20 @@ import {
     errors
 } from '../utils/error.js';
 import { misc } from '../utils/misc.js';
+import { _p } from '../helpers/asyncWrapper.js';
+import { cacheManager } from '../utils/cache.js';
+import { cacheKeys } from './products.enum.js'
 const productResolvers = {
     Query: {
         getProductAggregation: async(_, args, ctx) => {
-            console.log('args', args);
             try {
                 const { userId } = args;
                 console.log('userid', userId);
                 const product = await service.getProductAggregation(userId);
                 return product;
             } catch (err) {
-
+                logger.error(err);
+                return errors.withApolloError(INTERNAL_SERVER_ERROR);
             }
         },
         getProducts: async(_, args, ctx) => {
@@ -31,6 +34,7 @@ const productResolvers = {
         getSingleProduct: async(_, args, ctx, info) => {
             try {
                 const { id } = args;
+                const [cacheErr, cacheres] = await _p(cacheManager.get(cacheKeys.singleProductKey(userid, id)));
                 const product = await service.getSingleProduct(id);
                 return product;
             } catch (err) {

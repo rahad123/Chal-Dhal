@@ -2,7 +2,7 @@
 import { User } from './user.model.js';
 import { service } from './user.service.js';
 import { logger } from '../utils/logger.js';
-import { wrapper } from '../helpers/asyncWrapper.js';
+import { _p } from '../helpers/asyncWrapper.js';
 
 import { 
     errors
