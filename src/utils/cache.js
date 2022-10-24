@@ -1,4 +1,4 @@
-import { RedisCache } from 'redis-caching-manager';
+import { RedisCache } from "redis-caching-manager";
 
 const cacheManager = new RedisCache();
 

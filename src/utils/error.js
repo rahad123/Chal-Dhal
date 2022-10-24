@@ -1,8 +1,8 @@
 // const constants = require('./constants');
 // const { ApolloError } = require('apollo-server-express');
 
-import { constants } from './constants.js'
-import { ApolloError } from 'apollo-server-express'
+import { constants } from "./constants.js";
+import { ApolloError } from "apollo-server-express";
 
 const errors = {
   INTERNAL_SERVER_ERROR: {
@@ -19,7 +19,7 @@ const errors = {
   },
   TOO_MANY_REQUESTS: {
     message: constants.HTTP_CODE_429_MESSAGE,
-    code: constants.HTTP_CODE_429_CODE,  
+    code: constants.HTTP_CODE_429_CODE,
   },
   CATEGORY_LIMIT_REACHED: {
     message: constants.CATEGORY_LIMIT_REACHED_MESSAGE,
@@ -63,6 +63,4 @@ const errors = {
   },
 };
 
-export { 
-    errors
- };
+export { errors };
